@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Puppeteer</title>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                display: flex;
+                width: 100vw;
+                height: 100vh;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+            }
+            .img-container {
+               box-sizing: border-box;
+               border: 3px solid black;
+               border-radius: 50%;
+               transition: ease-in 0.3s;
+            }
+            .img-container:hover {
+                border: 3px solid red;
+                cursor: pointer;
+            }
+            img{
+                border-radius: 50%;
+                height: 250px;
+                width: 250px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+
+        </div>
+    </body>
+
+    <script>
+        (async () => {
+            const res = await fetch('../instagram.json');
+            const data = await res.json();
+            const htmlList =  data.map(({ img }) => `<div class="img-container"><img src="${img}"/></div>`).join('');
+
+            document.querySelector('.container').innerHTML = htmlList;
+        })();
+    </script>
+</html>
